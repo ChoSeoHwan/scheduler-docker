@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: './nginx/Dockerfile'
+    volumes:
+      - "${NGINX_CONFIG_ROOT}:/etc/nginx/conf.d/"
+      - "${NGINX_LOG_ROOT}:/var/log/nginx/"
+    environment:
+      TZ: "Asia/Seoul"
+    ports:
+      - "80:80"
+
+  scheduler-api:
+    container_name: scheduler-api-node
+    build:
+      context: .
+      dockerfile: './scheduler-api/Dockerfile'
+    volumes:
+      - "${SCHEDULER_API_ROOT}:/usr/src/app"
+    command:
+      - "${SCHEDULER_API_PM2_CONFIG_FILE}"
+      - "${SCHEDULER_API_PM2_OPTIONS}"
+    expose:
+      - "8001:8001"
