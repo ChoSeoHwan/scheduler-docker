@@ -1,14 +1,10 @@
 # Scheduler Docker
 
----
-
 ## Description
 
 Scheduler 서버에 적용할 Docker 설정
 
 ## Docker 구성
-
----
 
 ### Nginx Docker
 
@@ -21,8 +17,6 @@ Scheduler 서버에 적용할 Docker 설정
 
 
 ## Environment
-
----
 
 ### ETC
 - `ENVIRONMENT` : 현재 실행 환경 (development/production)
@@ -40,8 +34,6 @@ Scheduler 서버에 적용할 Docker 설정
 
 
 ## Usage Example
-
----
 
 Scheduler api 서버 구성을 통한 사용 예시
 
