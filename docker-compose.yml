@@ -3,26 +3,33 @@ version: '3'
 services:
   nginx:
     container_name: nginx
+    depends_on:
+      - node-api
     build:
-      context: .
-      dockerfile: './nginx/Dockerfile'
+      context: 'nginx'
+      dockerfile: 'Dockerfile'
+      args:
+        node_api_port: "${NODE_API_PORT}"
+    environment:
+      TZ: "Asia/Seoul"
+    restart: unless-stopped
     volumes:
       - "${NGINX_CONFIG_ROOT}:/etc/nginx/conf.d/"
       - "${NGINX_LOG_ROOT}:/var/log/nginx/"
-    environment:
-      TZ: "Asia/Seoul"
     ports:
       - "80:80"
 
-  scheduler-api:
-    container_name: scheduler-api-node
+  node-api:
+    container_name: node-api
     build:
-      context: .
-      dockerfile: './scheduler-api/Dockerfile'
+      context: 'node-api'
+      dockerfile: 'Dockerfile'
+      args:
+        environment: "${ENVIRONMENT}"
+        pm2_config_file: "${NODE_API_PM2_CONFIG_FILE}"
+        pm2_options: "${NODE_API_PM2_OPTIONS}"
     volumes:
-      - "${SCHEDULER_API_ROOT}:/usr/src/app"
-    command:
-      - "${SCHEDULER_API_PM2_CONFIG_FILE}"
-      - "${SCHEDULER_API_PM2_OPTIONS}"
+      - "${NODE_API_SOURCE_ROOT}:/usr/src/"
+      - "${NODE_API_LOG_ROOT}:/usr/logs/"
     expose:
-      - "8001:8001"
+      - "${NODE_API_PORT}:${NODE_API_PORT}"
