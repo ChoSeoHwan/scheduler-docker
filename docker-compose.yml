@@ -28,6 +28,7 @@ services:
         environment: "${ENVIRONMENT}"
         pm2_config_file: "${NODE_API_PM2_CONFIG_FILE}"
         pm2_options: "${NODE_API_PM2_OPTIONS}"
+    restart: unless-stopped
     volumes:
       - "${NODE_API_SOURCE_ROOT}:/usr/src/"
       - "${NODE_API_LOG_ROOT}:/usr/logs/"
