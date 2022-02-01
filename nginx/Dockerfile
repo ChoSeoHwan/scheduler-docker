@@ -12,7 +12,9 @@ WORKDIR /usr/script
 ADD ./script.sh ./
 RUN chmod +x ./script.sh
 
+WORKDIR /etc/nginx/conf.d
+
 ARG node_api_port
 ENV NODE_API_PORT "$node_api_port"
 
-CMD ["./script.sh"]
+CMD ["/usr/script/script.sh"]

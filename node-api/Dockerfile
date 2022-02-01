@@ -8,11 +8,13 @@ WORKDIR /usr/script
 ADD $environment/script.sh ./script.sh
 RUN chmod +x ./script.sh
 
+WORKDIR /usr/src
+
 ARG pm2_config_file
 ENV PM2_CONFIG_FILE "$pm2_config_file"
 
 ARG pm2_options
 ENV PM2_OPTIONS "$pm2_options"
 
-CMD ["./script.sh"]
+CMD ["/usr/script/script.sh"]
 ENTRYPOINT ["sh", "-c"]
