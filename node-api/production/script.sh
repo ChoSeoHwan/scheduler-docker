@@ -7,4 +7,4 @@ cd /usr/src/ || exit
 yarn install --production
 
 # production 모드로 pm2 실행
-pm2-runtime "${PM2_CONFIG_FILE}" --env=production "${PM2_OPTIONS}"
+pm2-runtime "${PM2_CONFIG_FILE}" --env=production "${PM2_OPTIONS}" --no-auto-exit

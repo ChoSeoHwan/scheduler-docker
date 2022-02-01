@@ -7,4 +7,4 @@ cd /usr/src/ || exit
 yarn install
 yarn build
 
-pm2-runtime "${PM2_CONFIG_FILE}" "${PM2_OPTIONS}"
+pm2-runtime "${PM2_CONFIG_FILE}" "${PM2_OPTIONS}" --no-auto-exit
